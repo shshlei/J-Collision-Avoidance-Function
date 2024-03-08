@@ -8,7 +8,7 @@ A = AA;
 
 width = 10;
 height = 10;
-for i = 1:1000
+for i = 1:100
 	x = width*(2*rand()-1);
 	y = height*(2*rand()-1);
 	theta = pi*(2*rand()-1);
@@ -20,10 +20,11 @@ for i = 1:1000
 	
 	[v1,x1,y1,z1,pa1,pb1]=MJ2(A, B);
 
-	[v2,x2,pa2,pb2]=Growth3(A, B);
+	%[v2, x2, y2, pa2, pb2]=Distance(A, B);
+	[v2, x2]=DualDistance(A, B);
 	
-	if v1 > 0 && v2 < 1
-		fprintf('error: The Growth function is error\n');
+	if (v1 > 0 && v2 <= 0) || (v1 <= 0 && v2 > 0)
+		fprintf('error: The distance function is error\n');
 		squareplot(A, 'b');
 		hold on;
 		squareplot(B, 'r');
